@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 8px;
+  cursor: none;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  background-color: #060d12;
+  color: #60a7b2;
+}
+
+#root {
+  min-height: 100svh;
+  cursor: none;
+}
