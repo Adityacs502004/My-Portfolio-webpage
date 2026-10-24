@@ -46,10 +46,12 @@ const AsciiBackground = () => {
 
     measure()
     window.addEventListener('resize', measure)
+    window.addEventListener('scroll', measure, { passive: true })
     window.addEventListener('mousemove', onMove)
 
     return () => {
       window.removeEventListener('resize', measure)
+      window.removeEventListener('scroll', measure)
       window.removeEventListener('mousemove', onMove)
       cancelAnimationFrame(frame)
     }
