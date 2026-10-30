@@ -1,9 +1,13 @@
+import { lazy, Suspense } from 'react'
+
 import Navbar from '../components/Navbar/Navbar'
 import CustomCursor from '../components/CustomCursor/CustomCursor'
 import AsciiBackground from '../components/Hero/AsciiBackground/AsciiBackground'
 import Hero from '../components/Hero/Hero'
-import Writing from '../components/Writing/Writing'
-import Projects from '../components/Projects/Projects'
+
+const Writing = lazy(() => import("../components/Writing/Writing"))
+const Projects = lazy(() => import("../components/Projects/Projects"))
+const Curtain = lazy(() => import("../components/Curtain_effect/Curtain_effect"))
 
 const App = () => {
   return (
@@ -12,8 +16,11 @@ const App = () => {
       <CustomCursor />
       <Navbar />
       <Hero />
-      <Writing />
-      <Projects />
+      <Suspense fallback={<div>Loading ...</div>}>
+        <Writing />
+        <Projects />
+        <Curtain />
+      </Suspense>
     </div>
   )
 }

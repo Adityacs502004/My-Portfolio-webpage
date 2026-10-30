@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
 
 const Picture = () => {
     const imageRef = useRef(null);
@@ -66,39 +65,28 @@ const Picture = () => {
 
         if (!container || !image || !ascii) return;
 
-        const enter = () =>{
-            gsap.to(image , {
-                opacity : 1,
-                duration : 0.15,
-                ease : 'power2.out'
-            });
-        };
-
         const move = (event) => {
             const bounds = container.getBoundingClientRect();
             const x = event.clientX - bounds.left;
             const y = event.clientY - bounds.top;
+            const isInside =
+                event.clientX >= bounds.left &&
+                event.clientX <= bounds.right &&
+                event.clientY >= bounds.top &&
+                event.clientY <= bounds.bottom;
 
-            image.style.maskImage = `radial-gradient(circle 6rem at ${x}px ${y}px, black 0 68%, transparent 100%)`;
-            image.style.webkitMaskImage = image.style.maskImage;
+            image.style.opacity = isInside ? '1' : '0';
+
+            if (isInside) {
+                image.style.maskImage = `radial-gradient(circle 6rem at ${x}px ${y}px, black 0 68%, transparent 100%)`;
+                image.style.webkitMaskImage = image.style.maskImage;
+            }
         };
 
-        const leave = () => {
-            gsap.to(image, {
-            opacity: 0,
-            duration: 0.2,
-            ease: 'power2.out'
-            });
-        };
-
-        container.addEventListener('mouseenter' , enter);
-        container.addEventListener('mousemove', move);
-        container.addEventListener('mouseleave' , leave);
+        window.addEventListener('mousemove', move);
 
         return () => {
-            container.removeEventListener('mouseenter', enter);
-            container.removeEventListener('mousemove', move);
-            container.removeEventListener('mouseleave', leave);
+            window.removeEventListener('mousemove', move);
         };
 
     }, []);
