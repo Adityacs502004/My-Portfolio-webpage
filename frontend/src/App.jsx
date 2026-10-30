@@ -7,6 +7,7 @@ import Hero from '../components/Hero/Hero'
 
 const Writing = lazy(() => import("../components/Writing/Writing"))
 const Projects = lazy(() => import("../components/Projects/Projects"))
+const Technical_Skills = lazy(() => import("../components/Technical_Skills/Technical_Skills"))
 const Curtain = lazy(() => import("../components/Curtain_effect/Curtain_effect"))
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Writing />
         <Projects />
         <Curtain />
+        <Technical_Skills />
       </Suspense>
     </div>
   )
