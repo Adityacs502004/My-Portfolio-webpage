@@ -136,10 +136,13 @@ const Technical_Skills = () => {
         const barEl = q('[data-bar]')[0]
         const scanEl = q('[data-scan]')[0]
         const navEls = q('[data-nav]')
+        const panels = q('[data-panel]')
         const cardsOf = (i) => q(`[data-panel="${i}"] [data-card]`)
 
         const cardFrom = { autoAlpha: 0, y: 36, rotateX: -25, scale: 0.94, transformPerspective: 700 }
-        const cardTo = { autoAlpha: 1, y: 0, rotateX: 0, scale: 1, ease: 'back.out(1.4)' }
+        const cardTo = { autoAlpha: 1, y: 0, rotateX: 0, scale: 1, ease: 'power3.out' }
+        gsap.set(panels, { autoAlpha: 0 })
+        gsap.set(panels[0], { autoAlpha: 1 })
 
         /* 1) INTRO: plays while the section scrolls into view, finishes right when it pins */
         gsap
@@ -166,6 +169,9 @@ const Technical_Skills = () => {
           const p = i === 0 ? 1 : Math.min(1, f / 0.35) // how much of the label has "decoded"
           const s = stages[i]
 
+          panels.forEach((panel, panelIndex) => {
+            gsap.set(panel, { autoAlpha: panelIndex === i ? 1 : 0 })
+          })
           setScramble(pathEl, s.id, p)
           setScramble(blurbEl, s.blurb, p)
           if (countEl) countEl.textContent = `${pad(s.tools.length)} tools`
@@ -217,7 +223,7 @@ const Technical_Skills = () => {
   )
 
     return (
-    <section ref={root} className='ts font-mono text-[#d9f4ee]'>
+    <section id='skills' ref={root} className='ts font-mono text-[#d9f4ee]'>
       <div ref={stage} className='ts-stage'>
         <div className='ts-bg-glow' />
         <div className='ts-bg-grid' />

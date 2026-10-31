@@ -10,7 +10,7 @@ const CustomCursor = () => {
 
     useEffect(() => {
         function handlemousemove(e) {
-            if (e.target.closest(".cursor_pointer , a , button" )){
+            if (e.target.closest('.cursor_pointer, .cursor-pointer, a, button')){
                 Setcursortype("pointer")
             }
             else{

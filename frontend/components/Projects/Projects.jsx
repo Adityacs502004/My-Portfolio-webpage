@@ -13,18 +13,28 @@ const Projects = () => {
   const section_element = useRef(null);
   const video_element = useRef(null);
   const content_element = useRef(null);
+  const content_overlay = useRef(null);
   const fasalnyay_section_element = useRef(null);
   const fasalnyay_video_element = useRef(null);
   const fasalnyay_content_element = useRef(null);
+  const fasalnyay_content_overlay = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(content_element.current, { autoAlpha: 0, y: 60 });
-      gsap.set(fasalnyay_content_element.current, { autoAlpha: 0, y: 60 });
+      gsap.set(content_element.current, { autoAlpha: 0, y: 60, pointerEvents: 'none' });
+      gsap.set(fasalnyay_content_element.current, { autoAlpha: 0, y: 60, pointerEvents: 'none' });
+      gsap.set([content_overlay.current, fasalnyay_content_overlay.current], {
+        autoAlpha: 0,
+        pointerEvents: 'none',
+      });
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(content_element.current, { autoAlpha: 1, y: 0 });
-        gsap.set(fasalnyay_content_element.current, { autoAlpha: 1, y: 0 });
+        gsap.set(content_element.current, { autoAlpha: 1, y: 0, pointerEvents: 'auto' });
+        gsap.set(fasalnyay_content_element.current, { autoAlpha: 1, y: 0, pointerEvents: 'auto' });
+        gsap.set([content_overlay.current, fasalnyay_content_overlay.current], {
+          autoAlpha: 1,
+          pointerEvents: 'auto',
+        });
         return;
       }
 
@@ -41,8 +51,10 @@ const Projects = () => {
           pin: true,
           scrub: true,
           invalidateOnRefresh: true,
-          onLeave: () => gsap.set(content_element.current, { autoAlpha: 0 }),
-          onLeaveBack: () => gsap.set(content_element.current, { autoAlpha: 0 })
+          onEnter: () => gsap.set(content_overlay.current, { autoAlpha: 1 }),
+          onEnterBack: () => gsap.set(content_overlay.current, { autoAlpha: 1 }),
+          onLeave: () => gsap.set(content_overlay.current, { autoAlpha: 0 }),
+          onLeaveBack: () => gsap.set(content_overlay.current, { autoAlpha: 0 })
         }
       });
 
@@ -55,6 +67,7 @@ const Projects = () => {
         .to(content_element.current, {
           autoAlpha: 1,
           y: 0,
+          pointerEvents: 'auto',
           duration: 0.2
         })
         .to({}, { duration: 0.5 }); 
@@ -67,8 +80,12 @@ const Projects = () => {
           pin: true,
           scrub: true,
           invalidateOnRefresh: true,
-          onLeave: () => gsap.set(fasalnyay_content_element.current, { autoAlpha: 0 }),
-          onLeaveBack: () => gsap.set(fasalnyay_content_element.current, { autoAlpha: 0 })
+          onEnter: () => gsap.set(fasalnyay_content_overlay.current, { autoAlpha: 1 }),
+          onEnterBack: () => gsap.set(fasalnyay_content_overlay.current, { autoAlpha: 1 }),
+          onLeave: () =>
+            gsap.set(fasalnyay_content_overlay.current, { autoAlpha: 0 }),
+          onLeaveBack: () =>
+            gsap.set(fasalnyay_content_overlay.current, { autoAlpha: 0 })
         }
       });
 
@@ -87,6 +104,7 @@ const Projects = () => {
         .to(fasalnyay_content_element.current, {
           autoAlpha: 1,
           y: 0,
+          pointerEvents: 'auto',
           duration: 0.2
         })
         .to({}, { duration: 0.5 });  
@@ -97,11 +115,11 @@ const Projects = () => {
   }, []);
 
   return (
-    <div ref={container_element} className='flex flex-col w-full'>
+    <div id='work' ref={container_element} className='relative flex flex-col w-full'>
         {/* client desk */}
-        <div className='w-[90%] place-self-center'>
+        <div className='relative z-10 w-[90%] place-self-center'>
         <div className='w-full text-[#60a7b2]/70 text-sm'>My Work</div>
-        <div className='fixed left-[5vw] top-1/2 z-10 w-[40vw] -translate-y-1/2 max-md:left-[5vw] max-md:w-[90vw]'>
+        <div ref={content_overlay} className='pointer-events-none fixed left-[5vw] top-1/2 z-10 w-[40vw] -translate-y-1/2 max-md:left-[5vw] max-md:w-[90vw]'>
           <div ref={content_element}>
             <Clientdesk_content />
           </div>
@@ -115,8 +133,8 @@ const Projects = () => {
       </div>
 
       {/* fasalnyay */}
-      <div className='relative w-[90%] place-self-center mt-32'>
-        <div className='fixed right-[5vw] top-1/2 z-10 w-[40vw] -translate-y-1/2 max-md:right-[5vw] max-md:w-[90vw]'>
+      <div className='relative z-10 w-[90%] place-self-center mt-32'>
+        <div ref={fasalnyay_content_overlay} className='pointer-events-none fixed right-[5vw] top-1/2 z-10 w-[40vw] -translate-y-1/2 max-md:right-[5vw] max-md:w-[90vw]'>
           <div ref={fasalnyay_content_element}>
             <Fasalnyay_contnet />
           </div>
