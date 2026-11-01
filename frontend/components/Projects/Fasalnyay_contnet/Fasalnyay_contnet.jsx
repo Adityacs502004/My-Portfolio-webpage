@@ -34,6 +34,28 @@ const Fasalnyay_contnet = () => {
           </span>
         ))}
       </div>
+
+      <div className='mt-8 flex items-center justify-end gap-6 sm:mt-12'>
+        <a
+          href='https://fasal-nyay.vercel.app/'
+          target='_blank'
+          rel='noreferrer'
+          className='group/link inline-flex items-center gap-2 border-b border-cyan-300 pb-1 text-sm font-bold text-cyan-200 transition-colors duration-300 hover:border-amber-200 hover:text-amber-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200'
+        >
+          Live
+          <span className='transition-transform duration-300 group-hover/link:translate-x-1'>
+            ↗
+          </span>
+        </a>
+        <a
+          href='https://github.com/Adityacs502004/FasalNyay'
+          target='_blank'
+          rel='noreferrer'
+          className='text-sm text-slate-300/55 transition-colors duration-300 hover:text-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200'
+        >
+          GitHub ↗
+        </a>
+      </div>
     </article>
   )
 }

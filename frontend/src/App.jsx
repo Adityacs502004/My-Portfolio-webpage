@@ -6,7 +6,6 @@ import AsciiBackground from '../components/Hero/AsciiBackground/AsciiBackground'
 import Hero from '../components/Hero/Hero'
 import Page_roller from '../components/Page_roller/Page_roller'
 import Contact from '../components/Contact/Contact'
-import Contact2 from '../components/Contact/Contact2'
 
 const Writing = lazy(() => import("../components/Writing/Writing"))
 const Projects = lazy(() => import("../components/Projects/Projects"))

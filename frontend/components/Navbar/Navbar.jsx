@@ -9,6 +9,7 @@ const links = [
   { label: 'Work', href: '#work' },
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
+  { label: 'GitHub', href: 'https://github.com/Adityacs502004', external: true },
 ]
 
 const Navbar = () => {
@@ -62,10 +63,12 @@ const Navbar = () => {
         </div>
 
         <div className='flex items-center gap-1 font-mono text-xs uppercase tracking-[0.12em] sm:gap-2'>
-          {links.map(({ label, href }) => (
+          {links.map(({ label, href, external }) => (
             <a
               key={href}
               href={href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noreferrer' : undefined}
               className='rounded-lg px-2 py-2 text-cyan-100/65 transition-colors hover:bg-cyan-200/10 hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:px-3'
             >
               [{label}]
