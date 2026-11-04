@@ -60,7 +60,11 @@ const Projects = () => {
 
       timeline
         .to(video_element.current, {
-          x: () => window.innerWidth - 30 - initialLeft - ((scale + 1) * initialWidth) / 2,
+          x: () =>
+            document.documentElement.clientWidth -
+            30 -
+            initialLeft -
+            ((scale + 1) * initialWidth) / 2,
           scale,
           duration: 0.85
         })
@@ -94,7 +98,7 @@ const Projects = () => {
           x: () => {
             const video = fasalnyay_video_element.current;
             const { left, width } = video.getBoundingClientRect();
-            const targetLeft = window.innerWidth * 0.05;
+            const targetLeft = document.documentElement.clientWidth * 0.05;
 
             return targetLeft - left + ((1.5 - 1) * width) / 2;
           },
