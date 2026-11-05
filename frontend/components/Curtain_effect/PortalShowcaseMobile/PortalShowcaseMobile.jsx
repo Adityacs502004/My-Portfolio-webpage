@@ -38,7 +38,7 @@ const PortalShowcaseMobile = () => {
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.set(ctaScreen.current, { clipPath: 'circle(150% at 50% 50%)' })
+      gsap.set(ctaScreen.current, { clipPath: 'inset(0% 0% 0% 0%)' })
       return
     }
 
@@ -53,7 +53,7 @@ const PortalShowcaseMobile = () => {
     gsap.set(cards[0], { autoAlpha: 1, scale: 1, y: 0, filter: 'blur(0px)' })
     gsap.set(glows[0], { autoAlpha: 0.4, scale: 1 })
     gsap.set(numbers[0], { autoAlpha: 0.1, y: 0 })
-    gsap.set(ctaScreen.current, { clipPath: 'circle(0% at 50% 50%)' })
+    gsap.set(ctaScreen.current, { clipPath: 'inset(0% 0% 100% 0%)' })
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -82,18 +82,10 @@ const PortalShowcaseMobile = () => {
       .to(glows[2], { autoAlpha: 0, duration: 0.7 }, '<')
 
     tl.to(ctaScreen.current, {
-      clipPath: 'circle(150% at 50% 50%)',
+      clipPath: 'inset(0% 0% 0% 0%)',
       duration: 2,
       ease: 'power4.inOut',
     }, 2.45)
-
-    tl.from('[data-cta-item]', {
-      y: 40,
-      autoAlpha: 0,
-      duration: 1.2,
-      stagger: 0.15,
-      ease: 'expo.out'
-    }, 2.8)
 
     const refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh())
     const refreshTimeout = window.setTimeout(() => ScrollTrigger.refresh(), 1000)
@@ -105,7 +97,7 @@ const PortalShowcaseMobile = () => {
   }, { scope: container })
 
   return (
-    <section ref={container} className='relative z-30 isolate h-screen min-h-screen w-full overflow-hidden bg-[#020508]'>
+    <section ref={container} className='relative z-30 isolate h-dvh min-h-dvh w-full overflow-hidden bg-[#020508]'>
       
       {/* PHASE 1: THE ABYSS */}
       <div className='absolute inset-0 flex items-center justify-center px-5'>
