@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Upper_half_card from './Cards/Upper_half_cards'
 import Lower_half_card from './Cards/Lower_half_card'
-import CurtainMobile from './CurtainMobile/CurtainMobile'
+import PortalShowcaseMobile from './PortalShowcaseMobile/PortalShowcaseMobile'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -44,7 +44,7 @@ const Curtain_effect = () => {
     return () => mediaQuery.removeEventListener('change', update)
   }, [])
 
-  return isCompact ? <CurtainMobile /> : <CurtainDesktop />
+  return isCompact ? <PortalShowcaseMobile /> : <CurtainDesktop />
 }
 
 const CurtainDesktop = () => {
