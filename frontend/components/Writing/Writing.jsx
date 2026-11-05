@@ -1,10 +1,26 @@
-import React, { useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
+import WritingMobile from './WritingMobile/WritingMobile'
 
 const Writing = () => {
+    const [isCompact, setIsCompact] = useState(false)
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 767px)')
+        const update = () => setIsCompact(mediaQuery.matches)
+        update()
+        mediaQuery.addEventListener('change', update)
+        return () => mediaQuery.removeEventListener('change', update)
+    }, [])
+
+    if (isCompact) return <WritingMobile />
+
+    return <WritingDesktop />
+}
+
+const WritingDesktop = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     const root = useRef(null);
