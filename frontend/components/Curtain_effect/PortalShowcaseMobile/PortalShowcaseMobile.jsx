@@ -105,7 +105,7 @@ const PortalShowcaseMobile = () => {
   }, { scope: container })
 
   return (
-    <section ref={container} className='relative h-svh w-full overflow-hidden bg-[#020508]'>
+    <section ref={container} className='relative z-30 isolate h-svh w-full overflow-hidden bg-[#020508]'>
       
       {/* --- PHASE 1: THE ABYSS (Deep Space Showcase) --- */}
       <div className='absolute inset-0 flex items-center justify-center px-5'>
