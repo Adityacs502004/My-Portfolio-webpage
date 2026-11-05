@@ -1,6 +1,6 @@
 const Cards = ({ project }) => {
   return (
-    <div className="relative h-[200px] w-[380px] flex-none rounded-tl-2xl rounded-tr-2xl bg-[#10232a] shadow-[0_24px_100px_rgba(0,0,0,0.35)]">
+    <div className="relative h-[200px] w-[min(78vw,380px)] flex-none rounded-tl-2xl rounded-tr-2xl bg-[#10232a] shadow-[0_24px_100px_rgba(0,0,0,0.35)] md:w-[380px]">
       <div className="absolute inset-x-2 bottom-0 top-2 overflow-hidden rounded-tl-2xl rounded-tr-2xl bg-[#101a2b] p-4 text-slate-100">
         <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} opacity-80`}></div>
         <div className="relative flex h-full gap-3">
