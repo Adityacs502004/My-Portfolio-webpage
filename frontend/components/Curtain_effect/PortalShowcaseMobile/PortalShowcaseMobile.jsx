@@ -105,7 +105,7 @@ const PortalShowcaseMobile = () => {
   }, { scope: container })
 
   return (
-    <section ref={container} className='relative z-30 isolate h-svh w-full overflow-hidden bg-[#020508]'>
+    <section ref={container} className='relative z-30 isolate h-dvh min-h-dvh w-full overflow-hidden bg-[#020508]'>
       
       {/* PHASE 1: THE ABYSS */}
       <div className='absolute inset-0 flex items-center justify-center px-5'>
@@ -133,9 +133,9 @@ const PortalShowcaseMobile = () => {
       {/* FIXED: Replaced rigid centering with overflow-y-auto and my-auto for flawless scaling */}
       <div 
         ref={ctaScreen}
-        className='absolute inset-0 z-50 flex h-full w-full flex-col overflow-y-auto bg-[#f2ebd9] px-6 py-24 text-center text-[#0a1116] will-change-[clip-path]'
+        className='absolute inset-0 z-50 flex h-full min-h-full w-full flex-col overflow-y-auto bg-[#f2ebd9] px-6 pb-10 pt-[12dvh] text-center text-[#0a1116] will-change-[clip-path]'
       >
-        <div className='my-auto flex w-full shrink-0 flex-col items-center justify-center'>
+        <div className='flex min-h-full w-full shrink-0 flex-col items-center justify-start'>
           <div className='w-full max-w-sm'>
             <p data-cta-item className='font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#60a7b2]'>
               Next chapter
