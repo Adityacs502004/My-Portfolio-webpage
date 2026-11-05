@@ -50,8 +50,8 @@ const Video = forwardRef((props , ref) => {
     },[]);
 
   return (
-    <div ref={ref} className='w-[500px] h-[300px] bg-cyan-900 rounded-xl flex justify-center items-center'>
-        <div className='w-[480px] h-[280px] bg-cyan-700 rounded-xl'>
+    <div ref={ref} className='flex aspect-[5/3] h-auto w-full max-w-[500px] items-center justify-center rounded-xl bg-cyan-900 md:h-[300px] md:w-[500px] md:aspect-auto'>
+        <div className='h-[calc(100%-20px)] w-[calc(100%-20px)] rounded-xl bg-cyan-700 md:h-[280px] md:w-[480px]'>
             <video className='h-full w-full object-cover rounded-xl' ref={videoref} width="100%" height="100%" muted loop playsInline preload='none' poster={poster_source} ></video>
         </div>
     </div>
