@@ -4,9 +4,16 @@ import nodemailer from 'nodemailer'
 import 'dotenv/config';
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+    origin : [
+        'https://my-portfolio-sigma-taupe-15.vercel.app',
+        'http://localhost:5173'
+    ],
+    methods : ['GET' , 'POST'],
+    allowedHeaders : ['Content-Type']
+}));
 app.use(express.json());
 
 const GOOGLE_USER = process.env.EMAIL_USER?.trim();
@@ -81,6 +88,6 @@ app.post('/send_detail' , async (req , res)=>{
         })
     }
 })
-app.listen(port, () => {
-    console.log(`Backend listening on http://localhost:${port}`);
+app.listen(port , '0.0.0.0', () => {
+    console.log(`Server is live on port ${port}`)
 })
