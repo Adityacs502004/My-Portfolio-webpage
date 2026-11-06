@@ -1,9 +1,10 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Upper_half_card from './Cards/Upper_half_cards'
 import Lower_half_card from './Cards/Lower_half_card'
+import PortalShowcaseMobile from './PortalShowcaseMobile/PortalShowcaseMobile'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -32,6 +33,21 @@ const projects = [
 ]
 
 const Curtain_effect = () => {
+  const [isCompact, setIsCompact] = useState(() => (
+    window.matchMedia('(max-width: 767px)').matches
+  ))
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsCompact(mediaQuery.matches)
+    mediaQuery.addEventListener('change', update)
+    return () => mediaQuery.removeEventListener('change', update)
+  }, [])
+
+  return isCompact ? <PortalShowcaseMobile /> : <CurtainDesktop />
+}
+
+const CurtainDesktop = () => {
   const curtain = useRef(null)
   const topPanel = useRef(null)
   const bottomPanel = useRef(null)

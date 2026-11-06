@@ -1,10 +1,26 @@
-import React, { useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
+import WritingMobile from './WritingMobile/WritingMobile'
 
 const Writing = () => {
+    const [isCompact, setIsCompact] = useState(false)
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 767px)')
+        const update = () => setIsCompact(mediaQuery.matches)
+        update()
+        mediaQuery.addEventListener('change', update)
+        return () => mediaQuery.removeEventListener('change', update)
+    }, [])
+
+    if (isCompact) return <WritingMobile />
+
+    return <WritingDesktop />
+}
+
+const WritingDesktop = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     const root = useRef(null);
@@ -99,7 +115,7 @@ const Writing = () => {
   return (
   <section
       ref={root}
-      className='container my-32 h-screen w-[90%] overflow-hidden place-self-center rounded-4xl border border-[#60a7b2]/20 bg-[#10232a] p-4 text-[#d9f4ee] shadow-[0_24px_100px_rgba(0,0,0,0.35)]'
+      className='container mx-auto my-32 h-screen w-[90%] overflow-hidden rounded-4xl border border-[#60a7b2]/20 bg-[#10232a] p-4 text-[#d9f4ee] shadow-[0_24px_100px_rgba(0,0,0,0.35)]'
   >
       <div
           className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-3xl border border-[#60a7b2]/10 bg-[#0b1a20]'

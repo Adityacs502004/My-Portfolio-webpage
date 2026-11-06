@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import axios from 'axios'
+import Api from '../../src/Service/api'
 
 gsap.registerPlugin(ScrambleTextPlugin, useGSAP, ScrollTrigger)
 
@@ -30,7 +30,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const send_user_data = await axios.post("http://localhost:3000/send_detail", {
+      const send_user_data = await Api.post('/send_detail', {
         username: user_details.name,
         email: user_details.email,
         details: user_details.details,

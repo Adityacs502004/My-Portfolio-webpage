@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 
 import Navbar from '../components/Navbar/Navbar'
 import CustomCursor from '../components/CustomCursor/CustomCursor'
@@ -13,10 +13,20 @@ const Technical_Skills = lazy(() => import("../components/Technical_Skills/Techn
 const Curtain = lazy(() => import("../components/Curtain_effect/Curtain_effect"))
 
 const App = () => {
+  const [isCompact, setIsCompact] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1023px)')
+    const update = () => setIsCompact(mediaQuery.matches)
+    update()
+    mediaQuery.addEventListener('change', update)
+    return () => mediaQuery.removeEventListener('change', update)
+  }, [])
+
   return (
     <div className='relative min-h-screen'>
-      <AsciiBackground />
-      <CustomCursor />
+      {!isCompact && <AsciiBackground />}
+      {!isCompact && <CustomCursor />}
       <Navbar />
       <Hero />
       <Suspense fallback={<div>Loading ...</div>}>

@@ -10,11 +10,14 @@ const Page_roller = () => {
   const curtain = useRef(null)
 
   useGSAP(() => {
+    const mm = gsap.matchMedia()
+
+    mm.add('(min-width: 768px) and (pointer: fine)', () => {
     let busy = false
     const block = (e) => e.preventDefault()
     const anchorY = () => anchor.current.getBoundingClientRect().top + window.scrollY
 
-    gsap.set(curtain.current, { yPercent: 100 }) 
+    gsap.set(curtain.current, { yPercent: 100 })
 
     const wipe = (dir) => {            
       if (busy) return
@@ -53,13 +56,16 @@ const Page_roller = () => {
       start: 'top top',
       onLeaveBack: () => wipe(-1),
     })
+    })
+
+    return () => mm.revert()
   }, { scope: anchor })
 
   return (
     <div ref={anchor} className="h-0">
       <div
         ref={curtain}
-        className="pointer-events-none fixed left-0 top-0 z-40 h-dvh w-screen bg-[#153048]"
+        className="pointer-events-none fixed left-0 top-0 z-40 hidden h-dvh w-screen bg-[#153048] md:block"
       />
     </div>
   )

@@ -9,7 +9,6 @@
 body {
   margin: 0;
   padding: 8px;
-  cursor: none;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
   background-color: #060d12;
@@ -18,7 +17,31 @@ body {
 
 #root {
   min-height: 100svh;
-  cursor: none;
+}
+
+@media (min-width: 1024px) {
+  body,
+  #root {
+    cursor: none;
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes cue {
+  0%,
+  100% {
+    transform: scaleX(0.35);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
 }
 
 input:-webkit-autofill,
