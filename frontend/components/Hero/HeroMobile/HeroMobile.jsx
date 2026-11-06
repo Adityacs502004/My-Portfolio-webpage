@@ -55,7 +55,7 @@ const HeroMobile = () => {
         </div>
         <div className='mt-8 overflow-hidden'>
           <p data-text-line className='max-w-[20ch] font-mono text-[11px] uppercase leading-relaxed tracking-[0.2em] text-white'>
-            Full-Stack Developer &<br /> Creative Engineer
+            Full-Stack Developer &<br /> Obsessive Product Builder
           </p>
         </div>
       </div>

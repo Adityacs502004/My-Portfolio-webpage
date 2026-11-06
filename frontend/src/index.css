@@ -9,7 +9,6 @@
 body {
   margin: 0;
   padding: 8px;
-  cursor: none;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
   background-color: #060d12;
@@ -18,7 +17,13 @@ body {
 
 #root {
   min-height: 100svh;
-  cursor: none;
+}
+
+@media (min-width: 1024px) {
+  body,
+  #root {
+    cursor: none;
+  }
 }
 
 @keyframes ticker {

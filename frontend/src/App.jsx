@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div className='relative min-h-screen'>
       {!isCompact && <AsciiBackground />}
-      <CustomCursor />
+      {!isCompact && <CustomCursor />}
       <Navbar />
       <Hero />
       <Suspense fallback={<div>Loading ...</div>}>

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -14,6 +14,7 @@ const links = [
 
 const Navbar = () => {
   const nav = useRef(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useGSAP(() => {
     const mm = gsap.matchMedia()
@@ -41,7 +42,7 @@ const Navbar = () => {
       <nav
         ref={nav}
         aria-label='Primary navigation'
-        className='mx-auto flex min-h-14 w-[95%] max-w-7xl items-center justify-between gap-4 rounded-2xl border border-cyan-200/10 bg-[#0b1425]/95 px-3 py-2 text-sm text-cyan-100 shadow-[0_12px_40px_rgba(0,0,0,0.2)] backdrop-blur-md sm:px-4'
+        className='relative mx-auto hidden min-h-14 w-[95%] max-w-7xl flex-wrap items-center justify-between gap-4 rounded-2xl border border-cyan-200/10 bg-[#0b1425]/95 px-3 py-2 text-sm text-cyan-100 shadow-[0_12px_40px_rgba(0,0,0,0.2)] backdrop-blur-md sm:px-4 md:flex'
       >
         <a
           href='/'
@@ -62,7 +63,7 @@ const Navbar = () => {
           <span>Available for ideas</span>
         </div>
 
-        <div className='flex items-center gap-1 font-mono text-xs uppercase tracking-[0.12em] sm:gap-2'>
+        <div className='hidden items-center gap-1 font-mono text-xs uppercase tracking-[0.12em] md:flex md:gap-2'>
           {links.map(({ label, href, external }) => (
             <a
               key={href}
@@ -75,7 +76,68 @@ const Navbar = () => {
             </a>
           ))}
         </div>
+
       </nav>
+
+      <button
+        type='button'
+        aria-expanded={isMenuOpen}
+        aria-controls='mobile-navigation'
+        aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        onClick={() => setIsMenuOpen((open) => !open)}
+        className='fixed right-5 top-5 z-[60] flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-200/20 bg-[#0b1425]/90 text-cyan-100 shadow-[0_12px_35px_rgba(0,0,0,0.3)] backdrop-blur-md transition-colors hover:bg-cyan-200/10 hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 md:hidden'
+      >
+        <span className='sr-only'>{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
+        <span className='flex w-5 flex-col gap-1.5' aria-hidden='true'>
+          <span className={`h-px w-full bg-current transition-transform ${isMenuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+          <span className={`h-px w-full bg-current transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`} />
+          <span className={`h-px w-full bg-current transition-transform ${isMenuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+        </span>
+      </button>
+
+      <div
+        id='mobile-navigation'
+        className={`fixed inset-0 z-50 flex flex-col overflow-y-auto bg-[#060d12] px-8 pb-12 pt-28 text-cyan-100 transition-[clip-path,visibility] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] md:hidden ${isMenuOpen ? 'visible [clip-path:circle(150%_at_calc(100%-2.5rem)_2.5rem)]' : 'invisible [clip-path:circle(0%_at_calc(100%-2.5rem)_2.5rem)]'}`}
+      >
+        <div className='pointer-events-none absolute inset-0 overflow-hidden' aria-hidden='true'>
+          <div className='absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl' />
+          <div className='absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-violet-500/10 blur-3xl' />
+          <div className='absolute inset-x-8 top-24 border-t border-cyan-200/10' />
+        </div>
+
+        <div className='relative flex flex-1 flex-col'>
+          <p className='font-mono text-[10px] uppercase tracking-[0.35em] text-cyan-300/60'>
+            Navigation / 04
+          </p>
+          <p className='mt-5 max-w-[16ch] text-4xl font-black leading-[0.9] tracking-[-0.06em] text-amber-50'>
+            Make something intentional.
+          </p>
+
+          <div className='mt-14 flex flex-col'>
+            {links.map(({ label, href, external }, index) => (
+              <a
+                key={`mobile-${href}`}
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noreferrer' : undefined}
+                onClick={() => setIsMenuOpen(false)}
+                className='group flex items-center justify-between border-b border-cyan-200/10 py-5 font-mono text-xl uppercase tracking-[0.12em] text-cyan-100/75 transition-colors first:border-t hover:text-amber-50'
+              >
+                <span className='flex items-center gap-4'>
+                  <span className='text-[10px] text-cyan-300/50'>0{index + 1}</span>
+                  {label}
+                </span>
+                <span className='text-cyan-300/50 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1'>↗</span>
+              </a>
+            ))}
+          </div>
+
+          <div className='mt-auto flex items-center gap-2 pt-12 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-100/45'>
+            <span className='h-2 w-2 animate-pulse rounded-full bg-emerald-300' />
+            Available for ideas
+          </div>
+        </div>
+      </div>
     </header>
   )
 }

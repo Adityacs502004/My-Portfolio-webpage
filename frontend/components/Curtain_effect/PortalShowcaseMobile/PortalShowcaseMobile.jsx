@@ -105,7 +105,8 @@ const PortalShowcaseMobile = () => {
   }, { scope: container })
 
   return (
-    <section ref={container} className='relative z-30 isolate h-svh w-full overflow-hidden bg-[#020508]'>
+    // FIX 1: Explicitly using h-[100vh] instead of dynamic viewport heights. GSAP handles this natively without gap bugs.
+    <section ref={container} className='relative z-30 mt-8 isolate h-[100vh] w-full overflow-hidden bg-[#020508]'>
       
       {/* PHASE 1: THE ABYSS */}
       <div className='absolute inset-0 flex items-center justify-center px-5'>
@@ -130,44 +131,45 @@ const PortalShowcaseMobile = () => {
       </div>
 
       {/* PHASE 2: THE PORTAL */}
-      {/* FIXED: Replaced rigid centering with overflow-y-auto and my-auto for flawless scaling */}
       <div 
         ref={ctaScreen}
-        className='absolute inset-0 z-50 flex h-full w-full flex-col overflow-y-auto bg-[#f2ebd9] px-6 py-24 text-center text-[#0a1116] will-change-[clip-path]'
+        // FIX 2: Added explicit block positioning and removed h-full on the inner wrapper
+        className='absolute left-0 top-0 z-50 h-[100vh] w-full overflow-y-auto bg-[#f2ebd9] will-change-[clip-path]'
       >
-        <div className='my-auto flex w-full shrink-0 flex-col items-center justify-center'>
-          <div className='w-full max-w-sm'>
-            <p data-cta-item className='font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#60a7b2]'>
-              Next chapter
-            </p>
-            {/* Adjusted clamp typography slightly so it comfortably fits mobile screens */}
-            <h2 data-cta-item className='mt-4 text-[clamp(3.2rem,13vw,4.5rem)] font-black leading-[0.85] tracking-[-0.05em]'>
-              Let&apos;s build<br />what&apos;s next.
-            </h2>
+        {/* FIX 3: Replaced flex height bounds with min-h-full and absolute padding-top (pt-32). 
+            The browser can no longer push the text off the top of the screen. */}
+        <div className='mx-auto flex min-h-full w-full max-w-sm flex-col items-center px-6 pb-24 pt-32 text-center text-[#0a1116]'>
+          
+          <p data-cta-item className='font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#60a7b2]'>
+            Next chapter
+          </p>
+          <h2 data-cta-item className='mt-4 text-[clamp(3.2rem,13vw,4.5rem)] font-black leading-[0.85] tracking-[-0.05em]'>
+            Let&apos;s build<br />what&apos;s next.
+          </h2>
 
-            <div className='mt-10 flex w-full flex-col gap-3'>
-              {projects.map((project) => (
-                <a
-                  key={`link-${project.id}`}
-                  data-cta-item
-                  href={project.github}
-                  target='_blank'
-                  rel='noreferrer'
-                  className='group relative flex w-full items-center justify-between overflow-hidden rounded-full border border-[#0a1116]/20 bg-transparent px-6 py-4 transition-colors hover:border-[#0a1116] hover:bg-[#0a1116] hover:text-[#f2ebd9]'
-                >
-                  <span className='relative z-10 text-sm font-bold tracking-wide'>{project.title}</span>
-                  <span className='relative z-10 font-mono transition-transform duration-300 group-hover:rotate-45'>↗</span>
-                </a>
-              ))}
-            </div>
-
-            <div data-cta-item className='mt-10 flex items-center justify-center gap-2'>
-              <div className='h-2 w-2 animate-pulse rounded-full bg-emerald-500' />
-              <span className='font-mono text-[10px] uppercase tracking-[0.2em] text-[#0a1116]/50'>
-                Available for freelance
-              </span>
-            </div>
+          <div className='mt-10 flex w-full flex-col gap-3'>
+            {projects.map((project) => (
+              <a
+                key={`link-${project.id}`}
+                data-cta-item
+                href={project.github}
+                target='_blank'
+                rel='noreferrer'
+                className='group relative flex w-full items-center justify-between overflow-hidden rounded-full border border-[#0a1116]/20 bg-transparent px-6 py-4 transition-colors hover:border-[#0a1116] hover:bg-[#0a1116] hover:text-[#f2ebd9]'
+              >
+                <span className='relative z-10 text-sm font-bold tracking-wide'>{project.title}</span>
+                <span className='relative z-10 font-mono transition-transform duration-300 group-hover:rotate-45'>↗</span>
+              </a>
+            ))}
           </div>
+
+          <div data-cta-item className='mt-10 flex items-center justify-center gap-2'>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-emerald-500' />
+            <span className='font-mono text-[10px] uppercase tracking-[0.2em] text-[#0a1116]/50'>
+              Available for freelance
+            </span>
+          </div>
+
         </div>
       </div>
 

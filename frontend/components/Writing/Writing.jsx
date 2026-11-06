@@ -115,7 +115,7 @@ const WritingDesktop = () => {
   return (
   <section
       ref={root}
-      className='container my-32 h-screen w-[90%] overflow-hidden place-self-center rounded-4xl border border-[#60a7b2]/20 bg-[#10232a] p-4 text-[#d9f4ee] shadow-[0_24px_100px_rgba(0,0,0,0.35)]'
+      className='container mx-auto my-32 h-screen w-[90%] overflow-hidden rounded-4xl border border-[#60a7b2]/20 bg-[#10232a] p-4 text-[#d9f4ee] shadow-[0_24px_100px_rgba(0,0,0,0.35)]'
   >
       <div
           className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-3xl border border-[#60a7b2]/10 bg-[#0b1a20]'

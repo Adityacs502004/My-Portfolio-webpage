@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+const apiBaseUrl = import.meta.env.VITE_API_URL
+    || `${window.location.protocol}//${window.location.hostname}:3000`
+
 const Api = axios.create({
-    baseURL : 'http://localhost:3000',
+    baseURL : apiBaseUrl,
     timeout : 30000,
-    withCredentials : true ,
     headers : {
         'Accept' : 'application/json'
     }
