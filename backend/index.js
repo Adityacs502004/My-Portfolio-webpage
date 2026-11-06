@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer'
 import 'dotenv/config';
 
 const app = express()
-const port = process.env.Port || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors({
     origin : [
@@ -88,6 +88,6 @@ app.post('/send_detail' , async (req , res)=>{
         })
     }
 })
-app.listen(process.env.Port, () => {
-    console.log("Server is live")
+app.listen(port , '0.0.0.0', () => {
+    console.log(`Server is live on port ${port}`)
 })
